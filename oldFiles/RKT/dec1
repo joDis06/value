@@ -1,0 +1,85 @@
+#lang racket
+;1 (sorted L) takes a list of numbers and reports true if the numbers are sorted in ascending order
+;;List -> Boolean
+(define sorted?
+  (λ(L)
+    (if (empty? L)
+        #t
+        (and (< (car L) (if (empty? (cdr L))
+                            (+ 1 (car L))
+                            (cadr L)))  (sorted? (cdr L))))))
+
+(sorted? '())
+(sorted? '(1 2 3 4))
+(sorted? '(1 2 3 2))
+(sorted? '(1 2 3 4 5 6 7 8 9 10))
+
+(define sum
+  (λ(L)
+    (if (empty? L)
+        0
+        (+ (car L) (sum (cdr L)))
+        )))
+
+
+;2 (max-list) returns max value in list ; assume L is a list with at least 1 number in it
+;;List -> 
+(define max-list
+  (λ(L)
+    (cond ((empty? (cdr L)) (car L))
+          ((sorted? L) (last L))
+          (else (max (car L) (max-list (cdr L))))
+          )))
+
+(max-list '(100))
+(max-list '(0 3 2 5 4))
+(max-list '(0 7 2 9 3843 40 1))
+(max-list '(1 2 3 4 5 6))
+
+;----------------------DECEMBER 2ND
+;(position item L) reports the first position of item in list L or false if it does not appear
+(define member?
+  (λ(x L)
+    (cond ((empty? L) #f)
+          ((equal? x (car L)) #t)
+          (else (member? x (cdr L)))
+          )))
+
+;;Date List -> Boolean  
+(define position
+  (λ(x L)
+    (if (member? x L)
+        (if (equal? x (car L))
+            0
+            (+ 1 (position x (cdr L))))
+        #f)))
+
+(position 'a '(a b c))
+(position 'b '(a b c))
+(position 'c '(a b c))
+(position 'd '(a b c))
+;----------------------DECEMBER 3RD
+
+;; Data List -> List
+; (cons x L) -> Constructs a new list by inserting x into the front of List L
+
+(cons 1 '(2 3))
+(cons 3 '(1))
+(cons '(a b) 'c)
+(cons 1 (cons 2 (cons 3 '())))
+(cons (cons 1 '(2)) '(3))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     

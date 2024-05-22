@@ -1,0 +1,66 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname cw) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+(define ones-digit
+  (λ(n)
+    (abs (remainder n 10))))
+
+(define sum-digits
+  (λ(n)
+    (if (< n 10)
+        n
+        (+ (remainder n 10)
+           (sum-digits (quotient n 10))
+           ))))
+
+;;----------------------------------------------------NOVEMBER 3RD--------------------------------------------------------------------------------------------------------------------
+
+;; Nonnegative-integer -> Nonnegative-inter
+   (define count7
+           (λ(n)
+          (cond ((= n 0) 0)
+                ((= (remainder n 10) 7)
+                (+ 1 (count7 (quotient n 10))))
+                (else (count7 (quotient n 10))))))
+
+(count7 7337217)
+
+(quotient 7337217 10)
+
+(remainder 7337 10)
+
+;; Integer -> Integer
+; b >= 1
+; n >= 1
+(define power
+  (λ(b n)
+    (cond ((= n 1) b)
+          ((= n 2) (sqr b))
+          (else (* b (power b (- n 1)) )))
+          ))
+           
+   
+;;tests
+(power 3 1)
+(power 3 2)
+(power 3 3)
+(power 3 4)
+
+;;Extended Power
+;; Number Integer -> Number
+;Assume n >= 0
+(define ePower
+  (λ(b n)
+    (if (= n 0)
+        1
+        (* b (power b (- n 1))))))
+
+(ePower -2 3)
+    
+
+
+
+
+
+          
+

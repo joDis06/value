@@ -1,0 +1,58 @@
+#lang racket
+
+;;List -> Integer
+;Assume L is a list of integers
+(define count-odd
+  (λ(L)
+    (cond ((empty? L) 0) 
+          ((odd? (car L)) (+ 1 (count-odd (cdr L))))
+          (else (count-odd (cdr L)))
+          )))
+
+(count-odd '(1 2 3 4 5) )
+(count-odd '())
+
+;;List -> Integer
+;Assume L is a list of integers
+(define count-even
+  (λ(L)
+    (cond ((empty? L) 0)
+          ((even? (car L)) (+ 1 (count-even (cdr L))))
+          (else (count-even (cdr L)))
+          )))
+
+(count-even '(1 2 3 4 5))
+(count-even '())
+
+(define all-even?
+  (λ(L)
+    (if (< 0 (count-odd L))
+        #f
+        #t)))
+
+(define allEven?
+  (λ(L)
+    (cond ((empty? L) #t)
+          ((odd? (car L)) #f)
+          ((even? (car L)) (allEven? (cdr L)))
+          (else #t)
+          )))
+
+(define AllEven?
+  (λ(L)
+    (or (empty? L)
+        (and (even? (car L))
+             (AllEven? (cdr L)))
+        )))
+
+(all-even? '())
+(all-even? '(0 2 4 6))
+(all-even? '(0 2 5 6))
+
+(allEven? '())
+(allEven? '(0 2 4 6))
+(allEven? '(0 2 5 6))
+
+(AllEven? '())
+(AllEven? '(0 2 4 6))
+(AllEven? '(0 2 5 6))

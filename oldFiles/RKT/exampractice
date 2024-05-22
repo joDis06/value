@@ -1,0 +1,27 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname exampractice) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+(define h
+  (λ(n)
+    (if (= n 1)
+        1
+        (+ (/ 1 n) (h (- n 1)))
+        )))
+
+(h 2)
+
+(define h-iter
+  (λ(n ans)
+    (if (= n ans)
+        ans
+        (+ (/ ans n) (h (- n 1))
+        ))))
+
+(h-iter 3 1)
+(h-iter 4 1)
+
+(define h-tail
+  (λ(n)
+    (h-iter n 1)))
+
+(h-tail 2)

@@ -1,0 +1,86 @@
+#lang racket
+
+;; Assume n is a nonnegative integer
+;; Integer Data -> List
+(define make-list
+  (λ(n x)
+    (if (= n 0)
+        '()
+        (cons x (make-list (- n 1) x)))))
+
+(make-list 0 'hi)
+(make-list 1 'hi)
+(make-list 3 'hi)
+;------------------------------
+(define dupla
+  (λ(x L)
+    (if (empty? L)
+        '()
+        (make-list (length L) x))))
+
+(dupla 0 '(a b c))
+(dupla 'a '(1))
+(dupla '() '(2 (3 4) 5 (())))
+;-----------------------------
+;(position item L) reports the first position of item in list L or false if it does not appear
+(define member?
+  (λ(x L)
+    (cond ((empty? L) #f)
+          ((equal? x (car L)) #t)
+          (else (member? x (cdr L)))
+          )))
+
+;;Date List -> Boolean  
+(define position
+  (λ(x L)
+    (if (member? x L)
+        (if (equal? x (car L))
+            0
+            (+ 1 (position x (cdr L))))
+        #f)))
+
+;;Data Data List -> List
+(define insertL
+  (λ(a b L)
+    (if (not (member? a L))
+        L
+        (if (equal? (position a L) 0)
+            (cons b L)
+            (cons (car L) (insertL a b (cdr L)))))))
+            
+
+(insertL 'cat 'hat '(bat sat cat mat))
+(insertL 6 5 '(1 2 3 4))
+
+;;Data Data List -> List
+(define insertR
+  (λ(a b L)
+    (if (not (member? a L))
+        L
+        (if (equal? (position a L) 0)
+            (cons (car L) (cons b (cdr L)))
+            (cons (car L) (insertR a b (cdr L)))))))
+
+(insertR 'cat 'hat '(bat sat cat mat))
+;-------------------------------------------------DECEMBER 7TH
+;;Data Data List -> List
+(define replace-nth
+  (λ(n x L)
+    (if (equal? n 0)
+        (cons x (cdr L))
+        (cons (car L) (replace-nth (- n 1) x (cdr L))))))
+
+(replace-nth 0 'cat '(hat mat))
+
+;---------------
+;;Data Data List -> List
+(define replace-all
+  (λ(a b L)
+    (cond ((not (member? a L)) L)
+          ((equal? (car L) a) (cons b (cdr L)))
+          ((member? a L) (cons (car L) (replace-all a b (cdr L))))
+          (else L))))
+
+(replace-all 'w 'i '(b r a w n))
+(replace-all 0 1 '(3 0 2 0 5))
+        

@@ -1,0 +1,19 @@
+#lang racket
+(define sum
+  (λ(L)
+    (if (empty? L)
+        0
+        (+ (car L) (sum (cdr L)))
+        )))
+
+(sum '())
+(sum '(1 2 3))
+
+(define my-last
+  (λ(L)
+    (if (empty? (cdr L))
+        (car L)
+        (my-last (cdr L)))))
+
+(my-last '(1))
+(my-last '(a b c d))

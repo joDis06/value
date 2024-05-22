@@ -1,0 +1,31 @@
+#lang racket
+;;Treat pairs as errors
+;;Data Atom -> Pair
+;(cons a b) -> retunrs pair (a.b)
+
+;HW 32
+(define L '(a b c d e))
+
+(cons (cadr L) '() )
+
+(cons (car L) (cons (cadr L) '() ))
+
+(cons (cadr L) (cons (car L) '() ))
+
+(cons (cons (car L) '() ) '() )
+
+(cons (cons (car L) (cons (cadr L) '())) '())
+
+(cons L '())
+
+(cons (cons (cons (car L) '()) '()) '())
+
+(cons (cadddr L) (rest (cddr L)))
+
+(cons (car L) (cddddr L))
+
+(cons (cadr L) (cons (caddr L) (cons (cadddr L) '() )))
+
+(cons (caddr L) (cons (cadr L) (cons (first L) '() )))
+
+(cons L (rest (cddr L)))

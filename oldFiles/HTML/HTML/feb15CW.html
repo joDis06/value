@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 12.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+
+<title>HTML and CSS and Javascript</title>
+
+<style>
+table {background-color: #E0FFFF} /* changing table's background color */
+td {
+	color: maroon;
+	font-family:"Comic Sans MS"
+}
+a:link {color:red;}    /* unvisited link */
+a:visited {color:green;} /* visited link */
+a:hover {color:purple;}   /* mouse over link */
+
+</style>
+
+<script language="javascript">
+var visButton = 0;
+var try_fortune = 0;
+var moveit = 0;
+
+function TheFortune() {
+	if (try_fortune == 0)
+		alert("You're likely to pass Intro-2 (I think).");
+	else if (try_fortune == 1)
+		alert("You're pressing your luck.  Don't click again.");
+	else if (try_fortune == 2)
+		alert("That's it.  Nothing good will come of this behavior.");
+	else
+		alert("See?  Nothing good.");
+	try_fortune += 1;
+
+}
+
+function MoveAround() {
+	visButton = Math.floor(Math.random() * 3) + 1 + visButton;
+	if (visButton > 3) visButton -= 4;
+	MakeVisible();
+}
+
+function MakeVisible() {
+	var i, s, b;
+	for (i = 0; i <= 3; ++i) {
+		s = "button" + i;
+		b = document.getElementById(s);
+		if (moveit > 4 && moveit < 10)
+			b.value = "Oh, come on...";
+		else if (moveit >= 10 && moveit <= 15)
+			b.value = "You've tried " + moveit + " times now...";
+		else if (moveit > 15 && moveit <= 17)
+			b.value = "You can stop now...";
+		else if (moveit > 17 && moveit <= 20)
+			b.value = "Stop.  Now.";
+		else if (moveit > 20 && moveit <= 24)
+			b.value = "I'm out of here.";
+		else if (moveit > 24)
+			b.value = "Gone...";
+		if (i != visButton)
+			b.style.visibility="hidden";
+		else
+			b.style.visibility="visible";
+		
+	}
+	moveit++;
+}
+</script>
+</head>
+
+<body onload="MakeVisible();">
+<form method="POST" action="#">
+<h3 align="center">
+HTML and CSS and Javascript</h3>
+<p align="left">
+<font size="4"><b>CSS:</b></font></p>
+<p>
+This table's visual properties 
+(like font, background color, etc.) are controlled by CSS styles.&nbsp;
+<br>Look at the page source.&nbsp; Some of the styling is controlled by Style 
+paragraph up in the &lt;head&gt; section, and some, like the &quot;Courier new!&quot; words 
+below are controlled locally inside the &lt;td&gt; tag.<br> <br>
+<table border="1" width="44%">
+  <tbody><tr>
+    <td width="33%">Comic Sans</td>
+    <td width="33%">Maroon</td>
+    <td width="34%">Maroon</td>
+  </tr>
+  <tr>
+    <td width="33%">Maroon</td>
+    <td width="33%">Maroon</td>
+    <td width="34%"  style="font-family:'Courier New', Courier, monospace; color:fuchsia">
+	Courier new in fuschia!</td>
+  </tr>
+</tbody></table>
+
+</p>
+	<p>This link's colors are also controlled by CSS (and try hovering over
+it):&nbsp; <a href="http://www.w3schools.com/css/tryit.asp?filename=trycss_link">more
+on CSS link colors</a></p>
+
+
+<hr>
+
+<p><font size="4"><b>Javascript:</b></font></p>
+
+  <p><input value="This is your fortune (press me once)" name="Whatever" onclick="TheFortune();" type="button"></p>
+<table border="1" height="150" width="61%">
+  <tbody><tr>
+    <td align="center" height="65" width="50%">&nbsp;<input name="button0" id="button0" value="Press Me" onmouseover="MoveAround();" type="button"></td>
+    <td align="center" height="65" width="50%">&nbsp;<input name="button1" id="button1" value="Press Me" onmouseover="MoveAround();" type="button"></td>
+  </tr>
+  <tr>
+    <td align="center" height="73" width="50%">&nbsp;<input name="button2" id="button2" value="Press Me" onmouseover="MoveAround();" type="button"></td>
+    <td align="center" height="73" width="50%">&nbsp;<input name="button3" id="button3" value="Press Me" onmouseover="MoveAround();" type="button"></td>
+  </tr>
+</tbody></table>
+</form>
+
+<p>&nbsp;</p>
+
+
+
+
+</body></html>
